@@ -12,6 +12,8 @@ const MenuDetailPage = () => {
   const storeMenu = useAppSelector((state) => state.menu.items);
   const dispatch = useAppDispatch();
   const specificMenu = storeMenu.find((menu) => menu.id === params.menuId);
+
+  //
   return (
     <section className="grid grid-cols-1 mt-14">
       <div className="flex items-center justify-center ">
