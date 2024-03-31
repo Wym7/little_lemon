@@ -12,3 +12,88 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MenuCategory {
+  id         String             @id @default(uuid())
+  name       String
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+  isArchived Boolean            @default(false)
+  Menus      MenuCategoryMenu[]
+}
+
+model Menu {
+  id          String             @id @default(uuid())
+  name        String
+  price       Decimal
+  description String?
+  imageUrl    String?
+  isFeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  categories  MenuCategoryMenu[]
+  OrderItem   OrderItem[]
+}
+
+model MenuCategoryMenu {
+  id             String       @id @default(uuid())
+  menuCategoryId String
+  menuCategory   MenuCategory @relation(fields: [menuCategoryId], references: [id])
+  menuId         String
+  menu           Menu         @relation(fields: [menuId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  isArchive      Boolean      @default(false)
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  name      String      @default("")
+  phone     String      @default("")
+  isPaid    Boolean     @default(false)
+  address   String      @default("")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  menuId    String
+  menu      Menu     @relation(fields: [menuId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Customer {
+    id        String   @id @default(uuid())
+    name      String   @default("")
+    phone     String    @default("")
+    email     String    @default("")
+    address   String    @default("")
+     createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Coupon {
+  id              String      @id @default(uuid())
+  code            String      @unique
+  discount        Float
+  expirationDate  DateTime
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  isArchived      Boolean      @default(false)
+}

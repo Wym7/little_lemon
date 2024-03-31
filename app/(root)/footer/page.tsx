@@ -1,3 +1,5 @@
+"use client";
+
 import { navLinks } from "@/components/Nav";
 import {
   faFacebook,
@@ -23,7 +25,7 @@ const Footer = () => {
 
   return (
     <footer className="flex items-center justify-center">
-      <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1 items-center justify-center gap-x-10 w-full bg-[#1e1e1e]">
+      <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1 items-center justify-center gap-x-10 w-full bg-gray-900">
         <div className="flex m-10 items-center justify-start">
           <Image
             src={"/Logo-bottom.png"}
@@ -56,7 +58,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="flex m-10 items-start justify-start flex-col ">
-          <p className="text-white text-3xl mb-5">Let us know you</p>
+          <p className="text-white text-3xl mb-5">Social Medias</p>
           <ul className="flex  gap-5">
             {socials.map((social) => (
               <li key={social.name} className="flex mb-2">

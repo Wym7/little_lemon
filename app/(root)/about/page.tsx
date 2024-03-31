@@ -2,12 +2,10 @@
 import { cn } from "@/lib/utils";
 import { Markazi_Text } from "next/font/google";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 const markazi = Markazi_Text({ subsets: ["latin"] });
 
 const About = () => {
-  const pathname = usePathname();
   return (
     <>
       <div className="flex items-center mb-20 justify-center" id="about">

@@ -1,21 +1,19 @@
-"use client";
-
 import Nav from "@/components/Nav";
+import { auth } from "@clerk/nextjs";
 import About from "./about/page";
 import Footer from "./footer/page";
-import Menu from "./menu/page";
+import ThisWeekSpecials from "./specials/page";
 import Testimonial from "./testimonial/testimonial";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { userId } = auth();
   return (
-    <main className="">
-      <div className="">
-        <div className="">
-          {/* TODO:Nav */}
-          {/* TODO:mobile-nav */}
-          <Nav />
+    <main>
+      <div>
+        <div>
+          <Nav userId={userId} />
           {children}
-          <Menu />
+          <ThisWeekSpecials />
           <Testimonial />
           <About />
           <Footer />

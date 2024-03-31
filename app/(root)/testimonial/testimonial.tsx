@@ -2,15 +2,20 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 
-const menus = [
+interface Testimonials {
+  name: string;
+  url: string;
+  rating: (0.5 | 1)[];
+  description: string;
+}
+
+const Testimonial: Testimonials[] = [
   {
     name: "Julie",
     url: "/Julie.jpg",
@@ -33,11 +38,10 @@ const menus = [
       "Little Lemon is a hidden gem. Authentic flavors, friendly service - a must-try for Mediterranean food lovers.",
   },
 ];
-const ratingLevels = { 0.5: faStarHalfStroke, 1: faStar };
 
-const Testimonial = () => {
+const TestimonialCard = () => {
   return (
-    <article className="items-center flex-col  mt-20 bg-[#1e1e1e] p-20 flex justify-center">
+    <article className="items-center rounded-b-2xl flex-col  mt-20 bg-gray-900 p-20 flex justify-center">
       <p
         className={cn(
           "text-yellow-400 text-6xl flex items-center justify-center"
@@ -46,36 +50,26 @@ const Testimonial = () => {
         What people say about us
       </p>
       <div className="grid lg:grid-cols-3 mt-20 md:grid-cols-2 grid-cols-1 gap-10">
-        {menus.map((menu) => (
+        {Testimonial.map((item) => (
           <Card
-            key={menu.name}
+            key={item.name}
             className="xl:w-[300px] bg-[#edefee] flex items-center justify-center flex-col border-none md:w-[250px]"
           >
             <CardHeader>
-              <CardTitle className="text-secondary">{menu.name}</CardTitle>
+              <CardTitle className="text-secondary">{item.name}</CardTitle>
               <CardDescription className="text-secondary">
-                {menu.description}
+                {item.description}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Image
-                src={menu.url}
+                src={item.url}
                 alt="Menu"
                 width={250}
                 height={100}
-                className="object-cover flex items-center justify-center rounded-xl min-h-20"
+                className="object-cover flex items-center justify-center  min-h-20"
               />
             </CardContent>
-            <CardFooter className="flex justify-start">
-              {/*   {menu.rating.map((rate) => (
-                <FontAwesomeIcon
-                  key={rate}
-                  icon={ratingLevels[rate]}
-                  size="xs"
-                  className="text-yellow-400"
-                />
-              ))} */}
-            </CardFooter>
           </Card>
         ))}
       </div>
@@ -83,4 +77,4 @@ const Testimonial = () => {
   );
 };
 
-export default Testimonial;
+export default TestimonialCard;

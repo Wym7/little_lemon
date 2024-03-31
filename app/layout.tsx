@@ -1,10 +1,11 @@
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
-import { ClerkProvider } from "@clerk/nextjs";
+import StoreProvider from "@/store/provider";
+import { ClerkProvider, auth } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Karla, Markazi_Text } from "next/font/google";
+import { Karla } from "next/font/google";
 import "./globals.css";
 
-const markazi = Markazi_Text({ subsets: ["latin"] });
 const karla = Karla({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,15 +19,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = auth();
+
   return (
     <ClerkProvider
       appearance={{
         variables: { colorPrimary: "#f4ce14" },
       }}
     >
-      <html lang="en">
-        <body className={(cn(), karla.className)}>{children}</body>
-      </html>
+      <StoreProvider>
+        <html lang="en">
+          <body className={(cn(), karla.className)}>
+            <Toaster />
+
+            {children}
+          </body>
+        </html>
+      </StoreProvider>
     </ClerkProvider>
   );
 }
