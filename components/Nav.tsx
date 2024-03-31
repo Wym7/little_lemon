@@ -31,7 +31,7 @@ const Nav = ({ userId }: any) => {
             height={150}
           />
         </Link>
-        <SheetPage />
+        <SheetPage userId={userId} />
         <ul className="xl:flex hidden gap-x-5">
           {navLinks.map((link) => (
             <li key={link.name} className="flex flex-col ">

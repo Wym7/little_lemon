@@ -69,7 +69,7 @@ const Cart = () => {
             </h1>
             {cartItems.map((item) => (
               <>
-                <li className="flex m-10 items-center justify-center border-b p-5">
+                <li className="flex m-10 items-center  justify-center border-b p-5">
                   <div className="h-24 w-24 relative ">
                     <Image
                       fill

@@ -18,7 +18,7 @@ const MenuDetailPage = () => {
     <section className="grid grid-cols-1 mt-14">
       <div className="flex items-center justify-center ">
         <Image
-          className="object-cover object-center rounded-tl-xl w-80 h-80 rounded-bl-xl"
+          className="object-cover object-center rounded-tl-xl xl:w-80 xl:h-80 lg:w-80 lg:h-80 w-60 h-72 rounded-bl-xl"
           //@ts-ignore
           src={specificMenu?.imageUrl}
           //@ts-ignore
@@ -26,16 +26,18 @@ const MenuDetailPage = () => {
           width={800}
           height={800}
         />
-        <div className="bg-gray-900 rounded-br-xl rounded-tr-xl w-[40rem] grid p-8 flex-col h-80 text-yellow-400">
-          <div className="flex gap-20">
-            <p className="text-4xl">{specificMenu?.name}</p>
-            <span className="text-xl">
+        <div className="bg-gray-900 rounded-br-xl  rounded-tr-xl w-[40%] lg:h-80  grid p-8 flex-col xl:h-80 h-72 text-yellow-400">
+          <div className="flex flex-col xl:gap-20 lg:flex-row lg:gap-[8rem] gap-0">
+            <p className="xl:text-4xl lg:text-4xl text-xl">
+              {specificMenu?.name}
+            </p>
+            <span className="xl:text-xl text-base">
               {formatter.format(Number(specificMenu?.price))}
             </span>
           </div>
-          <p className="">{specificMenu?.description}</p>
+          <p>{specificMenu?.description}</p>
           <Button
-            className=" w-full"
+            className="w-fit xl:w-full"
             onClick={() => {
               dispatch(addToCart({ ...specificMenu, quantity: 1 }));
               router.push("/menu");
