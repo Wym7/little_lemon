@@ -1,7 +1,6 @@
 "use client";
 
 import MenuCard from "@/components/MenuCard";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Markazi_Text } from "next/font/google";
 
@@ -14,9 +13,6 @@ const ThisWeekSpecials = () => {
         <p className={cn("heading xl:text-6xl text-4xl", markazi.className)}>
           This weeks specials
         </p>
-        <Button className="text-secondary flex items-center justify-center rounded-none mt-10 xl:p-8 p-5 xl:text-2xl text-lg">
-          Order Online
-        </Button>
       </div>
       <div>
         <MenuCard />

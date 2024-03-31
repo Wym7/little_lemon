@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { Markazi_Text } from "next/font/google";
+import Link from "next/link";
 
 const markazi = Markazi_Text({ subsets: ["latin"] });
 
@@ -21,9 +22,11 @@ export default function Home() {
               <br /> focused on traditional recipes <br /> served with a modern
               twist.
             </p>
-            <Button className="text-secondary xl:0 rounded-none xl:mt-20 p-8 xl:text-2xl text-base">
-              Reserve a Table
-            </Button>
+            <Link href={"/menu"}>
+              <Button className="text-secondary xl:0 rounded-none xl:mt-20 p-8 xl:text-2xl text-base">
+                Order Online
+              </Button>
+            </Link>
           </div>
           <img
             src={"/restaurantfood.jpg"}
