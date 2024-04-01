@@ -24,6 +24,7 @@ const AdminDashboard = async () => {
   if (!isAdmin) {
     redirect("/onboarding");
   }
+
   const totalRevenue = await getTotalRevenue();
   const salesCount = await getSalesCount();
   const stockCount = await getStockCount();
