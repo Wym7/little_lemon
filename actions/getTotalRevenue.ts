@@ -1,5 +1,6 @@
 import db from "@/lib/db";
 
+//
 export const getTotalRevenue = async () => {
   const paidOrders = await db.order.findMany({
     where: {
