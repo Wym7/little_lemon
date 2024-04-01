@@ -102,10 +102,7 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
           menuCategories: menuCategoryIds,
         };
 
-        await axios.patch(
-          `http://localhost:3000/api/menu/${params.menuId}`,
-          addIds
-        );
+        await axios.patch(`/api/menu/${params.menuId}`, addIds);
         toast({ title: "Menu updated" });
         router.refresh();
         router.push("/admin/menus");
