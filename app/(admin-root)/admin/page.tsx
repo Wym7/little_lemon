@@ -1,4 +1,4 @@
-import { getGraphRevenue } from "@/actions/getGraphRevenue";
+/* import { getGraphRevenue } from "@/actions/getGraphRevenue";
 import { getSalesCount } from "@/actions/getSalesCount";
 import { getStockCount } from "@/actions/getStockCount";
 import { getTotalCategories } from "@/actions/getTotalCategories";
@@ -31,7 +31,7 @@ const AdminDashboard = async () => {
   const totalCustomer = await getTotalCustomer();
   const totalCategories = await getTotalCategories();
   const graphRevenue = await getGraphRevenue();
-
+  //
   return (
     <div className="flex flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
@@ -107,3 +107,10 @@ const AdminDashboard = async () => {
 };
 
 export default AdminDashboard;
+ */
+
+const page = () => {
+  return <div>page</div>;
+};
+
+export default page;

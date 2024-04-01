@@ -1,4 +1,4 @@
-import { DataTable } from "@/components/ui/data-table";
+/* import { DataTable } from "@/components/ui/data-table";
 import db from "@/lib/db";
 import { formatter } from "@/lib/utils";
 import { format } from "date-fns";
@@ -55,3 +55,10 @@ const Orders = async () => {
 };
 
 export default Orders;
+ */
+
+const page = () => {
+  return <div>page</div>;
+};
+
+export default page;
