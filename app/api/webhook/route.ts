@@ -63,6 +63,15 @@ export async function POST(req: Request) {
       },
     });
 
+    const customers = await db.customer.create({
+      data: {
+        name: session?.customer_details?.name || "",
+        phone: session?.customer_details?.phone || "",
+        email: session?.customer_details?.email || "",
+        address: addressString,
+      },
+    });
+
     console.log(event.type);
 
     console.log(beforeData, "beforeData");
