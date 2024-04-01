@@ -1,4 +1,5 @@
 "use client";
+
 import MenuCategoryForm from "@/app/(admin-root)/admin/menuCategories/components/MenuCategoryForm";
 import { Separator } from "@/components/ui/separator";
 

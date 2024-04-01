@@ -1,4 +1,4 @@
-/* import { getGraphRevenue } from "@/actions/getGraphRevenue";
+import { getGraphRevenue } from "@/actions/getGraphRevenue";
 import { getSalesCount } from "@/actions/getSalesCount";
 import { getStockCount } from "@/actions/getStockCount";
 import { getTotalCategories } from "@/actions/getTotalCategories";
@@ -107,10 +107,3 @@ const AdminDashboard = async () => {
 };
 
 export default AdminDashboard;
- */
-
-const page = () => {
-  return <div>page</div>;
-};
-
-export default page;

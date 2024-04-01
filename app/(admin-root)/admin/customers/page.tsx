@@ -1,4 +1,4 @@
-/* import { DataTable } from "@/components/ui/data-table";
+import { DataTable } from "@/components/ui/data-table";
 import db from "@/lib/db";
 import { CustomerColumn, columns } from "./components/CustomerColumn";
 
@@ -39,10 +39,3 @@ const Customers = async () => {
 };
 
 export default Customers;
- */
-
-const page = () => {
-  return <div>page</div>;
-};
-
-export default page;
