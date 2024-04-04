@@ -3,6 +3,8 @@
 import MenuCard from "@/components/MenuCard";
 import { cn } from "@/lib/utils";
 import { Markazi_Text } from "next/font/google";
+import { Suspense } from "react";
+import { ThisWeekSpecialsSkeleton } from "./loading";
 
 const markazi = Markazi_Text({ subsets: ["latin"] });
 
@@ -15,7 +17,9 @@ const ThisWeekSpecials = () => {
         </p>
       </div>
       <div>
-        <MenuCard />
+        <Suspense fallback={<ThisWeekSpecialsSkeleton />}>
+          <MenuCard />
+        </Suspense>
       </div>
     </section>
   );

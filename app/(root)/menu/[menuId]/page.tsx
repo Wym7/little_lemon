@@ -18,7 +18,7 @@ const MenuDetailPage = () => {
     <section className="grid grid-cols-1 mt-14">
       <div className="flex items-center justify-center ">
         <Image
-          className="object-cover object-center rounded-tl-xl xl:w-80 xl:h-80 lg:w-80 lg:h-80 w-60 h-72 rounded-bl-xl"
+          className="object-cover object-center xl:w-80 xl:h-80 lg:w-80 lg:h-80 w-60 h-72"
           //@ts-ignore
           src={specificMenu?.imageUrl}
           //@ts-ignore
@@ -26,7 +26,7 @@ const MenuDetailPage = () => {
           width={800}
           height={800}
         />
-        <div className="bg-gray-900 rounded-br-xl  rounded-tr-xl w-[40%] lg:h-80  grid p-8 flex-col xl:h-80 h-72 text-yellow-400">
+        <div className="bg-gray-900 sm:rounded-br-xl sm:gap-20 lg:gap-10 md:gap-10  sm:rounded-tr-xl w-[40%] lg:h-80  grid p-8 flex-col xl:h-80 h-72 text-yellow-400">
           <div className="flex flex-col xl:gap-20 lg:flex-row lg:gap-[8rem] gap-0">
             <p className="xl:text-4xl lg:text-4xl text-xl">
               {specificMenu?.name}

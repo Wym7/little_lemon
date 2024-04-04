@@ -17,7 +17,8 @@ import { getMenus } from "@/store/slice/menuSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import { ThisWeekSpecialsSkeleton } from "../specials/loading";
 import Filter from "./[menuId]/components/filter";
 
 const Menu = () => {
@@ -66,36 +67,37 @@ const Menu = () => {
         {searchedMenus.length > 0 ? (
           searchedMenus.map((menu) => (
             <Link key={menu.name} href={`/menu/${menu.id}`}>
-              <Card
-                key={menu?.id}
-                className="xl:w-[300px] md:w-[250px] bg-[#edefee]"
-              >
-                <CardHeader>
-                  <CardTitle className="flex justify-between text-secondary">
-                    <p>{menu?.name}</p>
-                    <p className="text-emerald-500">
-                      {formatter.format(Number(menu.price))}
-                    </p>
-                  </CardTitle>
-                  <CardDescription>{menu?.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Image
-                    src={menu?.imageUrl || ""}
-                    alt="Menu"
-                    width={500}
-                    height={500}
-                    className="object-cover max-h-60 max-w-full object-center rounded-xl"
-                  />
-                </CardContent>
-              </Card>
+              <Suspense fallback={<ThisWeekSpecialsSkeleton />}>
+                <Card
+                  key={menu?.id}
+                  className="xl:w-[300px] md:w-[250px] bg-[#edefee]"
+                >
+                  <CardHeader>
+                    <CardTitle className="flex justify-between text-secondary">
+                      <p>{menu?.name}</p>
+                      <p className="text-emerald-500">
+                        {formatter.format(Number(menu.price))}
+                      </p>
+                    </CardTitle>
+                    <CardDescription>{menu?.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src={menu?.imageUrl || ""}
+                      alt="Menu"
+                      width={500}
+                      height={500}
+                      className="object-cover max-h-60 max-w-full object-center rounded-xl"
+                    />
+                  </CardContent>
+                </Card>
+              </Suspense>
             </Link>
           ))
         ) : (
           <div>No result.</div>
         )}
       </div>
-
       <Separator className="mt-20" />
     </article>
   );

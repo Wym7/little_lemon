@@ -69,7 +69,7 @@ const Cart = () => {
             </h1>
             {cartItems.map((item) => (
               <>
-                <li className="flex m-10 items-center  justify-center border-b p-5">
+                <li className="flex flex-wrap m-10 items-center  justify-center border-b p-5">
                   <div className="h-24 w-24 relative ">
                     <Image
                       fill
@@ -80,11 +80,11 @@ const Cart = () => {
                   </div>
                   <div className="sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
                     <div className="flex justify-center">
-                      <p className="text-lg font-semibold dark:text-white text-black">
+                      <p className="text-lg font-semibold mb-5 dark:text-white text-black">
                         {item.name}
                       </p>
                     </div>
-                    <div className=" flex text- items-center justify-center gap-10">
+                    <div className=" flex items-center justify-center sm:gap-10 gap-5">
                       <p className="text-gray-900 cursor-pointer ">
                         <MinusCircle
                           onClick={() => {
