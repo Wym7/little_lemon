@@ -15,9 +15,13 @@ import { Menu, ShoppingBagIcon, UserRoundCheck, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { navLinks } from "./Nav";
 
-export function SheetPage({ userId }: any) {
+interface SheetProps {
+  userId?: any;
+  navLinks: any;
+}
+
+export function SheetPage({ userId, navLinks }: SheetProps) {
   const [isExpended, setIsExpended] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -26,9 +30,35 @@ export function SheetPage({ userId }: any) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="xl:hidden " variant="default">
-          {isExpended ? <X /> : <Menu />}
-        </Button>
+        <div className="flex gap-x-1 ">
+          <Link
+            href={"/cart"}
+            className="flex xl:hidden  items-center justify-center"
+          >
+            <ShoppingBagIcon
+              size={40}
+              className="hover:text-yellow-400 transition "
+            />
+            {cart.length > 0 && (
+              <span
+                className={cn(
+                  " text-sm bg-yellow-400  rounded-full font-medium text-black",
+                  cart.length && "px-2 py-1"
+                )}
+              >
+                {cart.length > 0 && cart.length}
+              </span>
+            )}
+            {cart.length === 0 && ""}
+          </Link>
+          <Button
+            className="xl:hidden "
+            onClick={() => setIsExpended(isExpended)}
+            variant="default"
+          >
+            {isExpended ? <X /> : <Menu />}
+          </Button>
+        </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -37,7 +67,7 @@ export function SheetPage({ userId }: any) {
         </SheetHeader>
 
         <ul className={cn("flex flex-col gap-y-1 text-center mt-10")}>
-          {navLinks.map((link) => (
+          {navLinks.map((link: any) => (
             <li
               key={link.name}
               className="flex group transition-all flex-col  "
@@ -56,20 +86,6 @@ export function SheetPage({ userId }: any) {
           ))}
         </ul>
         <div className="flex flex-col mt-3 items-center justify-center">
-          <Link href={"/cart"} className="flex items-center justify-center">
-            <ShoppingBagIcon className="hover:text-yellow-400 w-8 h-8 transition " />
-            {cart.length > 0 && (
-              <span
-                className={cn(
-                  " text-sm bg-yellow-400  rounded-full font-medium text-black",
-                  cart.length && "px-2 py-1"
-                )}
-              >
-                {cart.length > 0 && cart.length}
-              </span>
-            )}
-            {cart.length === 0 && ""}
-          </Link>
           {userId && (
             <Button
               onClick={() => {

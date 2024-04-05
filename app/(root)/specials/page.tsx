@@ -4,7 +4,7 @@ import MenuCard from "@/components/MenuCard";
 import { cn } from "@/lib/utils";
 import { Markazi_Text } from "next/font/google";
 import { Suspense } from "react";
-import { ThisWeekSpecialsSkeleton } from "./loading";
+import Loading from "../loading";
 
 const markazi = Markazi_Text({ subsets: ["latin"] });
 
@@ -17,7 +17,7 @@ const ThisWeekSpecials = () => {
         </p>
       </div>
       <div>
-        <Suspense fallback={<ThisWeekSpecialsSkeleton />}>
+        <Suspense fallback={<Loading />}>
           <MenuCard />
         </Suspense>
       </div>

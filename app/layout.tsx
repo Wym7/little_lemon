@@ -21,6 +21,7 @@ export default function RootLayout({
 }>) {
   const { userId } = auth();
 
+  /* TODO have to push changes */
   return (
     <ClerkProvider
       appearance={{
@@ -31,7 +32,6 @@ export default function RootLayout({
         <html lang="en">
           <body className={(cn(), karla.className)}>
             <Toaster />
-
             {children}
           </body>
         </html>

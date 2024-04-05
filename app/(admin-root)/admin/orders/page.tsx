@@ -41,7 +41,7 @@ const Orders = async () => {
           Manage orders for the restaurant
         </p>
         <div className="mt-3 flex-col flex ">
-          <div className="w-[90vw]">
+          <div className="w-[65vw] lg:w-[80vw] md:w-[80vw] xl:w-[90vw] ">
             <DataTable
               searchKey="name"
               columns={columns}

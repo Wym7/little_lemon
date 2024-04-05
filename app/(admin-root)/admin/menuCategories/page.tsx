@@ -38,7 +38,7 @@ const MenuCategories = () => {
             <PlusCircleIcon className=" w-5 h-5" />
             Create New
           </Button>
-          <div className="w-[90vw] ">
+          <div className="w-[65vw] lg:w-[80vw] md:w-[80vw] xl:w-[90vw] ">
             <DataTable
               searchKey="name"
               columns={columns}

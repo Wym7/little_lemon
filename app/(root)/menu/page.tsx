@@ -17,12 +17,13 @@ import { getMenus } from "@/store/slice/menuSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
-import { ThisWeekSpecialsSkeleton } from "../specials/loading";
+import { useEffect, useState } from "react";
 import Filter from "./[menuId]/components/filter";
+import { ThisWeekSpecialsSkeleton } from "./loading";
 
 const Menu = () => {
   const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const menus = useAppSelector((state) =>
     state.menu.items.filter(
       (menu) => menu.isFeatured === true && menu.isArchived === false
@@ -49,6 +50,7 @@ const Menu = () => {
     dispatch(getMenus());
     dispatch(getMenuCategoryThunk());
     dispatch(getMenuCategoryMenuThunk());
+    setIsLoading(false);
   }, [dispatch]);
 
   return (
@@ -63,41 +65,85 @@ const Menu = () => {
           data={menuCategories}
         />
       </div>
-      <div className="grid lg:grid-cols-3  md:grid-cols-3 grid-cols-1 gap-10">
-        {searchedMenus.length > 0 ? (
-          searchedMenus.map((menu) => (
-            <Link key={menu.name} href={`/menu/${menu.id}`}>
-              <Suspense fallback={<ThisWeekSpecialsSkeleton />}>
-                <Card
-                  key={menu?.id}
-                  className="xl:w-[300px] md:w-[250px] bg-[#edefee]"
-                >
-                  <CardHeader>
-                    <CardTitle className="flex justify-between text-secondary">
-                      <p>{menu?.name}</p>
-                      <p className="text-emerald-500">
-                        {formatter.format(Number(menu.price))}
-                      </p>
-                    </CardTitle>
-                    <CardDescription>{menu?.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Image
-                      src={menu?.imageUrl || ""}
-                      alt="Menu"
-                      width={500}
-                      height={500}
-                      className="object-cover max-h-60 max-w-full object-center rounded-xl"
-                    />
-                  </CardContent>
-                </Card>
-              </Suspense>
-            </Link>
-          ))
-        ) : (
-          <div>No result.</div>
-        )}
-      </div>
+
+      {isLoading ? (
+        <ThisWeekSpecialsSkeleton />
+      ) : (
+        <>
+          <div className="flex items-center justify-center">
+            <div className="grid sm:grid-cols-3 grid-cols-1 gap-10">
+              {searchedMenus.length > 0 ? (
+                searchedMenus.map((menu) => (
+                  <div className=" ">
+                    <div className="">
+                      <Link key={menu.name} href={`/menu/${menu.id}`}>
+                        <Card
+                          key={menu?.id}
+                          className="xl:w-[300px] md:w-[250px] bg-[#edefee]"
+                        >
+                          <CardHeader>
+                            <CardTitle className="flex justify-between text-secondary">
+                              <p>{menu?.name}</p>
+                              <p className="text-emerald-500">
+                                {formatter.format(Number(menu.price))}
+                              </p>
+                            </CardTitle>
+                            <CardDescription>
+                              {menu?.description}
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent>
+                            <Image
+                              src={menu?.imageUrl || ""}
+                              alt="Menu"
+                              width={500}
+                              height={500}
+                              className="object-cover max-h-60 max-w-full object-center rounded-xl"
+                            />
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <>
+                  {!searchKey &&
+                    menus.map((menu) => (
+                      <Link key={menu.name} href={`/menu/${menu.id}`}>
+                        <Card
+                          key={menu?.id}
+                          className="xl:w-[300px] md:w-[250px] bg-[#edefee]"
+                        >
+                          <CardHeader>
+                            <CardTitle className="flex justify-between text-secondary">
+                              <p>{menu?.name}</p>
+                              <p className="text-emerald-500">
+                                {formatter.format(Number(menu.price))}
+                              </p>
+                            </CardTitle>
+                            <CardDescription>
+                              {menu?.description}
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent>
+                            <Image
+                              src={menu?.imageUrl || ""}
+                              alt="Menu"
+                              width={500}
+                              height={500}
+                              className="object-cover max-h-60 max-w-full object-center rounded-xl"
+                            />
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      )}
       <Separator className="mt-20" />
     </article>
   );

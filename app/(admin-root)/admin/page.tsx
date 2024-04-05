@@ -38,7 +38,7 @@ const AdminDashboard = async () => {
         <h1 className="font-bold text-4xl">Dashboard</h1>
         <p className="text-lg text-gray-500">Overview of your store</p>
         <Separator />
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <CardTitle className="text-sm font-medium">

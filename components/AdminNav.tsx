@@ -4,6 +4,7 @@ import { UserButton } from "@clerk/nextjs";
 import { StoreIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { AdminSheet } from "./AdminSheet";
 import { ModeToggle } from "./ui/mode-toggle";
 import { Separator } from "./ui/separator";
 
@@ -22,7 +23,7 @@ const AdminNav = async () => {
   return (
     <>
       <section>
-        <nav className=" p-4 w-full text-3xl text-yellow-400 flex items-center justify-center gap-x-80">
+        <nav className=" p-4 w-full text-3xl text-yellow-400 flex items-center justify-between ">
           <StoreIcon
             className="cursor-pointer text-black dark:text-white dark:hover:text-yellow-400 hover:text-yellow-400  transition"
             onClick={() => {
@@ -48,6 +49,7 @@ const AdminNav = async () => {
           <div className="flex gap-x-2 items-center justify-center">
             <ModeToggle />
             <UserButton afterSignOutUrl="/" />
+            <AdminSheet navLinks={nav_items} />
           </div>
         </nav>
         <Separator />

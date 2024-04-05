@@ -134,7 +134,7 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-20 mt-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 grid-cols-1 md:grid-cols-1 gap-20 mt-10">
             <div className="w-96 flex flex-col gap-5">
               <FormField
                 control={form.control}
@@ -145,7 +145,7 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
                     <FormControl>
                       <Input
                         placeholder="Menu"
-                        className="w-full"
+                        className="sm:w-full w-fit"
                         {...field}
                         disabled={loading}
                       />
@@ -162,7 +162,7 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
                     <FormLabel>Menu Price</FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full "
+                        className="sm:w-full w-fit"
                         disabled={loading}
                         type="number"
                         placeholder="9.99"
@@ -174,7 +174,7 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
                 )}
               />
             </div>
-            <div className="w-96  flex gap-5 flex-col">
+            <div className="sm:w-96 w-fit flex gap-5 flex-col">
               <FormLabel>Category</FormLabel>
               <Select
                 closeMenuOnSelect={false}
