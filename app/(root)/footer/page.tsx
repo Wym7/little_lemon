@@ -39,7 +39,10 @@ const Footer = () => {
           <p className="text-3xl mb-5">Footer Navigation</p>
           <ul className=" flex flex-col ">
             {navLinks.map((link) => (
-              <li key={link.name} className="flex flex-col mb-2">
+              <li
+                key={link.name}
+                className="flex flex-col mb-2 hover:underline"
+              >
                 <Link href={link.path} className={"text-yellow-400"}>
                   {link.name}
                 </Link>

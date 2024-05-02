@@ -133,7 +133,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <Separator className="mt-14" />
+      <Separator className="mt-24" />
     </>
   );
 };

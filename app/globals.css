@@ -116,5 +116,5 @@ html {
 }
 
 .heading {
-  @apply text-yellow-400 xl:mt-20 mt-10;
+  @apply xl:mt-20 mt-10;
 }

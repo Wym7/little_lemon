@@ -11,7 +11,12 @@ const About = () => {
       <div className="flex items-center mb-20 justify-center" id="about">
         <div className="grid lg:grid-cols-2 md:grid-cols-2 ml-10 grid-cols-1  gap-x-40 items-center justify-center">
           <div className="flex items-start justify-center flex-col">
-            <p className={cn("heading text-6xl", markazi.className)}>
+            <p
+              className={cn(
+                "heading text-6xl text-yellow-400",
+                markazi.className
+              )}
+            >
               Little Lemon
             </p>
             <p className="text-2xl text-secondary">Chicago</p>
