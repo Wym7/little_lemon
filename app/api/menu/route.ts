@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
     const {
       name,
       price,
@@ -14,29 +13,16 @@ export async function POST(req: Request) {
       isFeatured,
       isArchived,
     } = body;
-    console.log(menuCategories);
-    if (!name) {
-      return new NextResponse("Name is required", { status: 400 });
-    }
-    if (!price) {
-      return new NextResponse("Price is required", { status: 400 });
-    }
-    if (!imageUrl) {
+
+    if (!name) return new NextResponse("Name is required", { status: 400 });
+    if (!price) return new NextResponse("Price is required", { status: 400 });
+    if (!imageUrl)
       return new NextResponse("ImageUrl is required", { status: 400 });
-    }
-    if (!description) {
+    if (!description)
       return new NextResponse("Description is required", { status: 400 });
-    }
 
     const menu = await db.menu.create({
-      data: {
-        name,
-        price,
-        imageUrl,
-        description,
-        isArchived,
-        isFeatured,
-      },
+      data: { name, price, imageUrl, description, isArchived, isFeatured },
     });
 
     const newMenuCategoryMenu = menuCategories.map((item: number) => ({
@@ -44,9 +30,9 @@ export async function POST(req: Request) {
       menuId: menu.id,
     }));
 
-    await prisma.$transaction(
+    await db.$transaction(
       newMenuCategoryMenu.map((item: any) =>
-        prisma.menuCategoryMenu.create({
+        db.menuCategoryMenu.create({
           data: { menuCategoryId: item.menuCategoryId, menuId: item.menuId },
         })
       )
@@ -54,11 +40,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json(menu);
   } catch (error) {
-    console.log("Menu [Post] error", error);
+    console.error("Menu [POST] error", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
-
 export async function GET(req: Request) {
   try {
     const menus = await db.menu.findMany({
