@@ -3,13 +3,12 @@
 import { columns } from "@/app/(admin-root)/admin/menuCategories/components/MenuCategoryColumn";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppSelector } from "@/hooks";
 import { format } from "date-fns";
 import { PlusCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const MenuCategories = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const menuCategories = useAppSelector((state) => state.menuCategory.items);
 

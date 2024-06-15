@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { columns } from "@/app/(admin-root)/admin/menus/components/Columns";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
