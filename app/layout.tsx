@@ -1,12 +1,12 @@
-import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import StoreProvider from "@/store/provider";
 import { ClerkProvider, auth } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Karla } from "next/font/google";
+import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const karla = Karla({ subsets: ["latin"] });
+const karla = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Little Lemon | Authentic Mediterranean restaurant",
@@ -21,7 +21,6 @@ export default function RootLayout({
 }>) {
   const { userId } = auth();
 
-  /* TODO have to push changes */
   return (
     <ClerkProvider
       appearance={{

@@ -1,22 +1,11 @@
 import { ThisWeekSpecialsSkeleton } from "@/app/(root)/specials/loading";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { formatter } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { addToCart } from "@/store/slice/CartSlice";
 import { getMenus } from "@/store/slice/menuSlice";
 import { Menu } from "@prisma/client";
-import { Truck } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { toast } from "./ui/use-toast";
+import { toast } from "react-hot-toast";
+import Card from "./Card";
 
 const MenuCard = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,15 +14,42 @@ const MenuCard = () => {
       (menu) => menu.isFeatured === true && menu.isArchived === false
     )
   );
+
+  const menuCategoryMenus = useAppSelector(
+    (state) => state.menuCategoryMenu.items
+  );
+
+  const menuCategories = useAppSelector((state) => state.menuCategory.items);
+  const cart = useAppSelector((state) => state.cart.items);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getMenus());
-    setIsLoading(false);
-  }, []);
+    dispatch(getMenus())
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch menus:", error);
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
-  if (menus === undefined) {
-    return;
+  const handleAddToCart = async (menu: Menu) => {
+    setIsLoading(true);
+    try {
+      dispatch(addToCart({ ...menu, quantity: 1 }));
+      toast.success("Successfully added to the cart");
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+      toast.error("Failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!menus) {
+    return null;
   }
 
   return (
@@ -42,43 +58,25 @@ const MenuCard = () => {
         <ThisWeekSpecialsSkeleton />
       ) : (
         <div className="grid lg:grid-cols-3  md:grid-cols-3 grid-cols-1 gap-10">
-          {menus.map((menu: Menu) => (
-            <Card
-              key={menu.name}
-              className="xl:w-[300px]  md:w-[250px] bg-[#edefee]"
-            >
-              <CardHeader>
-                <CardTitle className="flex justify-between text-secondary">
-                  <p>{menu.name}</p>
-                  <p className="text-emerald-500">
-                    {formatter.format(Number(menu.price))}
-                  </p>
-                </CardTitle>
-                <CardDescription>{menu.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Image
-                  src={menu?.imageUrl || ""}
-                  alt="Menu"
-                  width={400}
-                  height={400}
-                  className="object-cover max-h-40  rounded-xl"
+          {menus.map((menu: Menu) => {
+            const menuCategoryMenu = menuCategoryMenus.find(
+              (mcm) => mcm.menuId === menu.id
+            );
+
+            const category = menuCategories.find(
+              (category) => category.id === menuCategoryMenu?.menuCategoryId
+            );
+            return (
+              <>
+                <Card
+                  category={category}
+                  menu={menu}
+                  handleAddToCard={handleAddToCart}
+                  isLoading={isLoading}
                 />
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button
-                  className="text-secondary"
-                  onClick={() => {
-                    dispatch(addToCart({ ...menu, quantity: 1 }));
-                    toast({ description: "Successfully added to the cart" });
-                  }}
-                >
-                  Add to Cart
-                </Button>
-                <Truck className="text-secondary" />
-              </CardFooter>
-            </Card>
-          ))}
+              </>
+            );
+          })}
         </div>
       )}
     </article>

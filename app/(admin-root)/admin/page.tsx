@@ -4,13 +4,14 @@ import { getStockCount } from "@/actions/getStockCount";
 import { getTotalCategories } from "@/actions/getTotalCategories";
 import { getTotalCustomer } from "@/actions/getTotalCustomer";
 import { getTotalRevenue } from "@/actions/getTotalRevenue";
-import { Overview } from "@/components/OverView";
+import { AreaChartComponent } from "@/components/ui/areachart";
+import { BarChartComponent } from "@/components/ui/barchart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import db from "@/lib/db";
 import { formatter } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
-import { CreditCard, DollarSignIcon, Package, User2 } from "lucide-react";
+import { Beef, CreditCard, DollarSignIcon, Package, User2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const AdminDashboard = async () => {
@@ -31,6 +32,8 @@ const AdminDashboard = async () => {
   const totalCustomer = await getTotalCustomer();
   const totalCategories = await getTotalCategories();
   const graphRevenue = await getGraphRevenue();
+  console.log(graphRevenue, "graphRevenue");
+
   //
   return (
     <div className="flex flex-col">
@@ -64,7 +67,7 @@ const AdminDashboard = async () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <CardTitle className="text-sm font-medium">Total Meals</CardTitle>
-              <Package className="h-4 text-muted-foreground w-4" />
+              <Beef className="h-4 text-muted-foreground w-4" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stockCount}</div>
@@ -93,14 +96,8 @@ const AdminDashboard = async () => {
             </CardContent>
           </Card>
         </div>
-        <Card className="col-span-4 ">
-          <CardHeader>
-            <CardTitle>Overview</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <Overview data={graphRevenue} />
-          </CardContent>
-        </Card>
+        <AreaChartComponent data={graphRevenue} />
+        <BarChartComponent data={graphRevenue} />
       </div>
     </div>
   );

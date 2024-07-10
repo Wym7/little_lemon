@@ -1,21 +1,31 @@
 "use client";
 
 import MenuCard from "@/components/MenuCard";
+import { useAppDispatch } from "@/hooks";
 import { cn } from "@/lib/utils";
-import { Markazi_Text } from "next/font/google";
-import { Suspense } from "react";
+import { getMenuCategoryMenuThunk } from "@/store/slice/menuCategoryMenuSlice";
+import { getMenuCategoryThunk } from "@/store/slice/menuCategorySlice";
+import { getMenus } from "@/store/slice/menuSlice";
+import { Inter } from "next/font/google";
+import { Suspense, useEffect } from "react";
 import Loading from "../loading";
 
-const markazi = Markazi_Text({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 const ThisWeekSpecials = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getMenus());
+    dispatch(getMenuCategoryThunk());
+    dispatch(getMenuCategoryMenuThunk());
+  }, [dispatch]);
   return (
-    <section className="grid-cols-1 grid" id="specials">
+    <section className="grid-cols-1 grid " id="specials">
       <div className="flex items-center xl:gap-x-96 gap-x-5 md:gap-x-[16rem] lg:gap-x-[30rem] justify-center ">
         <p
           className={cn(
-            "heading text-yellow-400 xl:text-6xl text-4xl ",
-            markazi.className
+            "heading text-secondary font-semibold xl:text-6xl text-4xl ",
+            font.className
           )}
         >
           This weeks specials

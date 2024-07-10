@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import z from "zod";
 import { Button } from "../../../../../components/ui/button";
 import {
@@ -15,7 +16,6 @@ import {
   FormMessage,
 } from "../../../../../components/ui/form";
 import { Input } from "../../../../../components/ui/input";
-import { toast } from "../../../../../components/ui/use-toast";
 
 interface MenuCategoryProps {
   initialData?: MenuCategory[];
@@ -48,20 +48,19 @@ const MenuCategoryForm = ({ initialData }: MenuCategoryProps) => {
       setLoading(true);
       if (initialData) {
         await axios.patch(`/api/menuCategory/${params.menuCategoryId}`, values);
-        toast({ title: "MenuCategory updated", duration: 2000 });
+        toast.success("MenuCategory updated");
         router.refresh();
         router.push("/admin/menuCategories");
         reset();
       } else {
         await axios.post("/api/menuCategory", values);
-        toast({ title: "MenuCategory created", duration: 2000 });
+        toast.success("MenuCategory created");
         router.refresh();
         router.push("/admin/menuCategories");
         reset();
       }
     } catch (error) {
-      toast({ title: "Something went wrong" });
-      console.log(error);
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }

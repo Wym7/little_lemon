@@ -41,10 +41,10 @@ const Testimonial: Testimonials[] = [
 
 const TestimonialCard = () => {
   return (
-    <article className="items-center rounded-b-2xl flex-col  mt-20 bg-gray-900 p-20 flex justify-center">
+    <article className="items-center shadow-xl rounded-b-2xl flex-col  mt-20 bg-gray-900 p-20 flex justify-center">
       <p
         className={cn(
-          "text-yellow-400 text-6xl flex items-center justify-center"
+          "text-yellow-400 text-6xl font-semibold flex items-center justify-center"
         )}
       >
         What people say about us

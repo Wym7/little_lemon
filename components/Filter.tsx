@@ -1,12 +1,12 @@
 "use client";
 
+import { MenuCategorySkeleton } from "@/app/(root)/menu/loading";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MenuCategory } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { useEffect, useState } from "react";
-import { MenuCategorySkeleton } from "../../loading";
 
 interface FilterProps {
   data: MenuCategory[];
@@ -47,7 +47,9 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
 
   return (
     <div className="mb-8 ">
-      <h3 className="text-3xl font-semibold">Filter by {name}</h3>
+      <h3 className="text-3xl font-semibold text-secondary">
+        Filter by {name}
+      </h3>
       <hr className="my-4" />
       {isLoading ? (
         <MenuCategorySkeleton />

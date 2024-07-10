@@ -18,11 +18,11 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { z } from "zod";
 import ImageUpload from "../../../../../components/ui/image-upload";
-import { toast } from "../../../../../components/ui/use-toast";
 
 interface MenuProps {
   initialData?: Menu[] | null;
@@ -103,7 +103,7 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
         };
 
         await axios.patch(`/api/menu/${params.menuId}`, addIds);
-        toast({ title: "Menu updated" });
+        toast.success("Menu updated");
         router.refresh();
         router.push("/admin/menus");
       } else {
@@ -117,13 +117,13 @@ const MenuForm = ({ initialData, menuCategoryIds }: MenuProps) => {
         };
         const response = await axios.post("/api/menu", addIds);
         if (response.statusText === "OK") {
-          toast({ title: "Menu created" });
+          toast.success("Menu created");
           router.refresh();
           router.push("/admin/menus");
         }
       }
     } catch (error) {
-      toast({ title: "Something went wrong" });
+      toast.error("Something went wrong");
       console.log(error);
     } finally {
       setLoading(false);

@@ -3,15 +3,12 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useAppSelector } from "@/hooks";
 import { cn } from "@/lib/utils";
-import { Menu, ShoppingBagIcon, UserRoundCheck, X } from "lucide-react";
+import { Menu, UserRoundCheck } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -31,41 +28,16 @@ export function SheetPage({ userId, navLinks }: SheetProps) {
     <Sheet>
       <SheetTrigger asChild>
         <div className="flex gap-x-1 ">
-          <Link
-            href={"/cart"}
-            className="flex xl:hidden  items-center justify-center"
-          >
-            <ShoppingBagIcon
-              size={40}
-              className="hover:text-yellow-400 transition "
-            />
-            {cart.length > 0 && (
-              <span
-                className={cn(
-                  " text-sm bg-yellow-400  rounded-full font-medium text-black",
-                  cart.length && "px-2 py-1"
-                )}
-              >
-                {cart.length > 0 && cart.length}
-              </span>
-            )}
-            {cart.length === 0 && ""}
-          </Link>
           <Button
             className="xl:hidden "
             onClick={() => setIsExpended(isExpended)}
             variant="default"
           >
-            {isExpended ? <X /> : <Menu />}
+            <Menu />
           </Button>
         </div>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader>
-          <SheetTitle></SheetTitle>
-          <SheetDescription></SheetDescription>
-        </SheetHeader>
-
         <ul className={cn("flex flex-col gap-y-1 text-center mt-10")}>
           {navLinks.map((link: any) => (
             <li

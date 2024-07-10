@@ -5,7 +5,6 @@ import { StoreIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AdminSheet } from "./AdminSheet";
-import { ModeToggle } from "./ui/mode-toggle";
 import { Separator } from "./ui/separator";
 
 const AdminNav = async () => {
@@ -47,7 +46,6 @@ const AdminNav = async () => {
             ))}
           </ul>
           <div className="flex gap-x-2 items-center justify-center">
-            <ModeToggle />
             <UserButton afterSignOutUrl="/" />
             <AdminSheet navLinks={nav_items} />
           </div>

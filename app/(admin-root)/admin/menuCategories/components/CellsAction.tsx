@@ -4,6 +4,7 @@ import axios from "axios";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { Button } from "../../../../../components/ui/button";
 import {
   DropdownMenu,
@@ -12,7 +13,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../../../../../components/ui/dropdown-menu";
-import { toast } from "../../../../../components/ui/use-toast";
 import { MenuCategoryColumn } from "./MenuCategoryColumn";
 
 interface CellsActionProps {
@@ -23,17 +23,17 @@ const CellsAction = ({ data }: CellsActionProps) => {
   const router = useRouter();
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast({ description: "Copied to clipboard", variant: "green" });
+    toast.success("Copied to clipboard");
   };
 
   const onDelete = async (id: string) => {
     try {
       setLoading(true);
       await axios.delete(`/api/menuCategory/${id}`);
-      toast({ description: "Deleted...", variant: "green" });
+      toast.success("Menu Category Deleted!");
     } catch (error) {
       console.log(error);
-      toast({ description: "Error Deleting", variant: "green" });
+      toast.success("Error Deleting");
     } finally {
       setLoading(false);
     }

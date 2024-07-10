@@ -67,8 +67,8 @@ export async function POST(req: Request) {
     phone_number_collection: {
       enabled: true,
     },
-    success_url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart?success=1`,
-    cancel_url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart?canceled=1`,
+    success_url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/?success=1`,
+    cancel_url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/?canceled=1`,
     metadata: {
       orderId: order.id,
     },
