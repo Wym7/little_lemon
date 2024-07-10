@@ -86,7 +86,7 @@ const ShoppingBagSheet = () => {
     if (existingItem) {
       existingItem.quantity += item.quantity;
     } else {
-      acc.push({ ...item });
+      acc.push({ ...item, price: Number(item.price) });
     }
     return acc;
   }, []);
