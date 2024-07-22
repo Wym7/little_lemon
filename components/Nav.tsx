@@ -46,17 +46,15 @@ const Nav = ({ userId }: any) => {
             </li>
           ))}
           <ShoppingBagSheet />
-          {userId && (
-            <Button
-              onClick={() => {
-                router.push("/admin");
-              }}
-              className="mt-3"
-              variant={"ghost"}
-            >
-              <UserRoundCheck />
-            </Button>
-          )}
+          <Button
+            onClick={() => {
+              router.push("/admin");
+            }}
+            className="mt-3"
+            variant={"ghost"}
+          >
+            <UserRoundCheck />
+          </Button>
         </ul>
       </div>
     </nav>

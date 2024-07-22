@@ -5,7 +5,6 @@ export default authMiddleware({
     "/",
     "/menu",
     "/api/webhook",
-    "/admin",
     "/api/menu",
     "/api/menuCategory",
     "/api/menuCategoryMenu",

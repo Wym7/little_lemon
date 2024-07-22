@@ -57,7 +57,7 @@ const Card = ({
             <Loader2 className="animate-spin" />
           ) : (
             <>
-              <div className="flex items-center gap-x-2">
+              <div onClick={() => {}} className="flex items-center gap-x-2">
                 <ShoppingCart size={15} />
                 Add to Cart
               </div>

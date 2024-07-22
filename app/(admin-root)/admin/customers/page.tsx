@@ -7,6 +7,7 @@ const Customers = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    distinct: ["id"],
   });
 
   const formattedCustomers: CustomerColumn[] = customers.map((customer) => ({
