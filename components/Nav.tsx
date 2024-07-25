@@ -3,6 +3,7 @@ import { UserRoundCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { SheetPage } from "./SheetPage";
 import ShoppingBagSheet from "./ShoppingBagSheet";
 import { Button } from "./ui/button";
 
@@ -26,10 +27,10 @@ const Nav = ({ userId }: any) => {
             height={150}
           />
         </Link>
-        {/*  <div className="">
+        <div className="xl:hidden flex">
           <ShoppingBagSheet />
           <SheetPage navLinks={navLinks} userId={userId} />
-        </div> */}
+        </div>{" "}
         <ul className="xl:flex hidden gap-x-5">
           {navLinks.map((link) => (
             <li key={link.name} className="flex flex-col ">
@@ -45,7 +46,9 @@ const Nav = ({ userId }: any) => {
               </Link>
             </li>
           ))}
-          <ShoppingBagSheet />
+          <div className="xl:flex hidden">
+            <ShoppingBagSheet />
+          </div>
           <Button
             onClick={() => {
               router.push("/admin");

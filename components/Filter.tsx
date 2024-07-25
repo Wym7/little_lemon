@@ -54,7 +54,7 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
       {isLoading ? (
         <MenuCategorySkeleton />
       ) : (
-        <div className="flex flex-wrap gap-5">
+        <div className="flex flex-wrap items-center justify-center  xl:gap-5 gap-2">
           {data.map((filter) => (
             <div key={filter.id} className="flex items-center">
               <Button
