@@ -12,7 +12,6 @@ Built with Next.Js, React, Tailwind, Shadcn Ui, TypeScript, Prisma, Redux Toolki
 - Seamless user experience.
 - Convenient admin user interface.
 - Optimistic updates with toast notifications for user experience.
-- Light mode & Dark Mode Option for admins.
 - Revenue, Sales, Customer, Items tracking with Barchart.
 - Menus and Menu Categories tracking using data tables including search filter.
 - Payments and orders tracking with data tables for Stripe payments.
