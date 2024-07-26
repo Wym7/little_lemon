@@ -1,6 +1,6 @@
 # Little Lemon - A Fully Functional Restaurant App with Admin Dashboard and Food Order
 
-Built with Next.Js, React, Tailwind, Shadcn Ui, TypeScript, Prisma, Redux Toolkit
+Built with Next.Js, React, Tailwind, Shadcn Ui, TypeScript, Prisma, Redux Toolkit, Stripe
 
 ## Features
 
