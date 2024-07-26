@@ -7,7 +7,7 @@ Built with Next.Js, React, Tailwind, Shadcn Ui, TypeScript, Prisma, Redux Toolki
 - Intuitive design for easy navigation.
 - Quick access to essential functions.
 - Authentication using Clerk.
-- Fully responsive grid design.
+- Fully responsive grid layout.
 - Quick and easy Menu Categories filter.
 - Seamless user experience.
 - Convenient admin user interface.
