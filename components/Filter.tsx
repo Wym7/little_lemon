@@ -1,21 +1,19 @@
 "use client";
 
-import { MenuCategorySkeleton } from "@/app/(root)/menu/loading";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MenuCategory } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
-import { useEffect, useState } from "react";
 
 interface FilterProps {
   data: MenuCategory[];
   name: string;
   valueKey: string;
 }
+
 const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const searchParams = useSearchParams();
   const selectedValue = searchParams.get(valueKey);
 
@@ -41,35 +39,27 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
     router.push(url);
   };
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
   return (
     <div className="mb-8 ">
       <h3 className="text-3xl font-semibold text-secondary">
         Filter by {name}
       </h3>
       <hr className="my-4" />
-      {isLoading ? (
-        <MenuCategorySkeleton />
-      ) : (
-        <div className="flex flex-wrap items-center justify-center  xl:gap-5 gap-2">
-          {data.map((filter) => (
-            <div key={filter.id} className="flex items-center">
-              <Button
-                className={cn(
-                  "rounded-md text-sm text-gray-800 p-2 bg-white border border-gray-300",
-                  selectedValue === filter.id && "bg-yellow-400 text-white"
-                )}
-                onClick={() => onClick(filter.id)}
-              >
-                {filter.name}
-              </Button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="flex flex-wrap items-center justify-center  xl:gap-5 gap-2">
+        {data.map((filter) => (
+          <div key={filter.id} className="flex items-center">
+            <Button
+              className={cn(
+                "rounded-md text-sm text-gray-800 p-2 bg-white border border-gray-300",
+                selectedValue === filter.id && "bg-yellow-400 text-white"
+              )}
+              onClick={() => onClick(filter.id)}
+            >
+              {filter.name}
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

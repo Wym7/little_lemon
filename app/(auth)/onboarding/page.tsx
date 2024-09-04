@@ -36,7 +36,7 @@ const OnBoarding = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/user", values);
+      await axios.post("/api/user", values);
       toast({ description: "Success...", variant: "green" });
       form.reset();
       router.push("/admin");

@@ -1,12 +1,16 @@
 "use client";
 import { UserRoundCheck } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import Loader from "./Loader";
 import { SheetPage } from "./SheetPage";
-import ShoppingBagSheet from "./ShoppingBagSheet";
 import { Button } from "./ui/button";
 
+const ShoppingBagSheet = dynamic(() => import("./ShoppingBagSheet"), {
+  loading: () => <Loader />,
+});
 export const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "#about" },
@@ -30,7 +34,7 @@ const Nav = ({ userId }: any) => {
         <div className="xl:hidden flex">
           <ShoppingBagSheet />
           <SheetPage navLinks={navLinks} userId={userId} />
-        </div>{" "}
+        </div>
         <ul className="xl:flex hidden gap-x-5">
           {navLinks.map((link) => (
             <li key={link.name} className="flex flex-col ">

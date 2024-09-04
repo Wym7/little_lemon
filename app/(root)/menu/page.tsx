@@ -1,6 +1,9 @@
 "use client";
 
-import Filter from "@/components/Filter";
+import {
+  MenuCategorySkeleton,
+  ThisWeekSpecialsSkeleton,
+} from "@/components/SkeletonLoadings";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,25 +22,29 @@ import { getMenuCategoryThunk } from "@/store/slice/menuCategorySlice";
 import { getMenus } from "@/store/slice/menuSlice";
 import { Menu as MenuType } from "@prisma/client";
 import { Loader2, ShoppingCart } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { ThisWeekSpecialsSkeleton } from "./loading";
+
+const Filter = dynamic(() => import("@/components/Filter"), {
+  loading: () => <MenuCategorySkeleton />,
+  ssr: false,
+});
 
 const Menu = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
+
   const menus = useAppSelector((state) =>
-    state.menu.items.filter(
-      (menu) => menu.isFeatured === true && menu.isArchived === false
-    )
+    state.menu.items.filter((menu) => menu.isFeatured && !menu.isArchived)
   );
 
   const params = useSearchParams();
   const searchKey = params.get("menuCategoryId");
-  const menuCategories = useAppSelector((state) => state.menuCategory.items);
 
+  const menuCategories = useAppSelector((state) => state.menuCategory.items);
   const menuCategoryMenus = useAppSelector(
     (state) => state.menuCategoryMenu.items
   );
@@ -46,27 +53,42 @@ const Menu = () => {
     .filter((item) => item.menuCategoryId === searchKey)
     .map((item) => item.menuId);
 
-  const searchedMenus = menus.filter((item) =>
-    searchMenuCategoryIds.includes(item.id)
+  const searchedMenus = searchKey
+    ? menus.filter((item) => searchMenuCategoryIds.includes(item.id))
+    : menus;
+
+  const handleAddToCart = useCallback(
+    async (menu: MenuType) => {
+      setIsLoading(true);
+      try {
+        dispatch(addToCart({ ...menu, quantity: 1 }));
+        toast.success("Successfully added to the cart");
+      } catch (error) {
+        console.error("Failed to add to cart:", error);
+        toast.error("Failed. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [dispatch]
   );
 
-  const handleAddToCart = async (menu: MenuType) => {
-    setIsLoading(true);
-    try {
-      dispatch(addToCart({ ...menu, quantity: 1 }));
-      toast.success("Successfully added to the cart");
-    } catch (error) {
-      console.error("Failed to add to cart:", error);
-      toast.error("Failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
   useEffect(() => {
-    dispatch(getMenus());
-    dispatch(getMenuCategoryThunk());
-    dispatch(getMenuCategoryMenuThunk());
-    setIsLoading(false);
+    const fetchData = async () => {
+      try {
+        await Promise.all([
+          dispatch(getMenus()).unwrap(),
+          dispatch(getMenuCategoryThunk()).unwrap(),
+          dispatch(getMenuCategoryMenuThunk()).unwrap(),
+        ]);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -75,11 +97,13 @@ const Menu = () => {
         Menus
       </div>
       <div className=" text-center gap-5 grid grid-cols-1">
-        <Filter
-          valueKey="menuCategoryId"
-          name="MenuCategories"
-          data={menuCategories}
-        />
+        <Suspense>
+          <Filter
+            valueKey="menuCategoryId"
+            name="MenuCategories"
+            data={menuCategories}
+          />
+        </Suspense>
       </div>
 
       {isLoading ? (

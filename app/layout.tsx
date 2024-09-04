@@ -1,6 +1,5 @@
-import { cn } from "@/lib/utils";
 import StoreProvider from "@/store/provider";
-import { ClerkProvider, auth } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -19,8 +18,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userId } = auth();
-
   return (
     <ClerkProvider
       appearance={{
@@ -29,7 +26,7 @@ export default function RootLayout({
     >
       <StoreProvider>
         <html lang="en">
-          <body className={(cn(), karla.className)}>
+          <body className={karla.className}>
             <Toaster />
             {children}
           </body>

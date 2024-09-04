@@ -6,18 +6,15 @@ import {
   SheetFooter,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useAppSelector } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export function AdminSheet({ navLinks }: any) {
   const [isExpended, setIsExpended] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
-  const cart = useAppSelector((state) => state.cart.items);
 
   return (
     <Sheet>

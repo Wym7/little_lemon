@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { formatter } from "@/lib/utils";
 import { Menu } from "@prisma/client";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 
@@ -49,20 +49,12 @@ const Card = ({
           {formatter.format(Number(menu.price))}
         </p>
         <Button
-          className="text-secondary"
+          className="text-secondary flex items-center gap-x-2"
           onClick={() => handleAddToCard(menu)}
           disabled={isLoading}
         >
-          {isLoading ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            <>
-              <div onClick={() => {}} className="flex items-center gap-x-2">
-                <ShoppingCart size={15} />
-                Add to Cart
-              </div>
-            </>
-          )}
+          <ShoppingCart size={15} />
+          Add to Cart
         </Button>
       </CardFooter>
     </CardDiv>
